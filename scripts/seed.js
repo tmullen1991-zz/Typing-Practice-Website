@@ -20,7 +20,7 @@ db.Word.deleteMany({})
   });
 */
 // update db from JSON
-/*
+
 db.Word.insertMany(list)
   .then(() => {
     console.log("updated db should be created");
@@ -30,7 +30,7 @@ db.Word.insertMany(list)
     console.log(err);
     process.exit(1);
   });
-*/
+
 // converts giant JSON to include ids and creates new JSON for above code to creat new db
 /*
 var fs = require("fs");
