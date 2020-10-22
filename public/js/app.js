@@ -1,5 +1,6 @@
 $(document).ready(function () {
   var wordList = [];
+  var time = -1;
   var currentId = 0;
   var count = 0;
   var right = 0;
@@ -27,6 +28,17 @@ $(document).ready(function () {
 
   //create highlighted word
   $("#user-input").keyup((key) => {
+    if (time === -1) {
+      time += 1;
+      setInterval(() => {
+        time += 1;
+        var number = time;
+        if (number.toString().length === 1) {
+          number = ("0" + number).slice(-2);
+        }
+        $("#timer").html(number);
+      }, 1000);
+    }
     var id = "#word" + currentId.toString();
     var currentWord = $(id).text();
     var userInput = $("#user-input").val();

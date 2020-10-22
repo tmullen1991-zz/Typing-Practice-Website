@@ -1,8 +1,8 @@
 body{
   font-family: Helvetica;
 }
-span{
-  font-size: 25px;
+span, input{
+  font-size: 25px !important;
 }
 .highlight-right {
   background-color: yellow;

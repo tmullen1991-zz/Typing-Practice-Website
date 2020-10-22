@@ -24,21 +24,31 @@
         <span class="my-2 px-2" id="text-dump"></span>
       </div>
 
-      <div class="row py-4" id="input-area">
-        <input class="mx-auto" id="user-input" />
+      <div class="row justify-content-center py-4 input-group" id="input-area">
+        <input class="input-group-text" id="user-input" />
+        <div class="input-group-text">
+          <span>Time: <span id="timer">00</span> S</span>
+        </div>
+        <div
+          class="row justify-content-center  input-group"
+          id="input-area"
+        >
+          <div class="input-group-text">
+            <span>
+              Words Completed: <span id="number-count"></span> =)
+              
+            </span>
+          </div>
+          <div class="input-group-text">
+            <span>
+              Mistrokes: <span id="number-wrong"></span> =(
+              
+            </span>
+          </div>
+        </div>
       </div>
-      <div class="row py-4">
-        <h1>
-          COUNT:
-          <h1 id="number-count"></h1>
-        </h1>
-      </div>
-      <div class="row">
-        <h4>
-          Mistrokes:
-          <h4 id="number-wrong"></h4>
-        </h4>
-      </div>
+
+      <div class="row"></div>
     </div>
   </body>
 </html>
