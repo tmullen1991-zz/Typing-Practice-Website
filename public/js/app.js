@@ -1,41 +1,58 @@
 $(document).ready(function () {
   var wordList = [];
-  var wordArrHTML = [];
-  var currentWordNum = 0;
+  var currentId = 0;
+  var count = 0;
+  var right = 0;
+  var wrong = 0;
+  var load = function (x, y) {
+    for (i = x; i < y; i++) {
+      $("#text-dump").append(wordList[i]);
+    }
+  };
   $.ajax({
     method: "GET",
     url: "/words",
   }).then((data) => {
     wordList = data.sort(() => Math.random() - 0.5);
     wordList.forEach((element, i) => {
-      wordList[i] = element.name;
+      wordList[i] =
+        "<span class='px-1 py-2' id='word" +
+        i +
+        "'>" +
+        element.name +
+        " </span> ";
     });
-    wordList.forEach((word, i) => {
-      var text = "<span class='px-1' id='word" + i + "'>" + word + "</span> ";
-      wordArrHTML.push(text);
-      $("#text-dump").append(text);
-    });
+    load(0, 10);
   });
 
   //create highlighted word
-  $("#user-input").keyup(() => {
-    var currentWordStr = wordList[currentWordNum] + " ";
-    var id = "#word" + currentWordNum.toString();
-    var next = "#word" + (currentWordNum + 1).toString();
-    var input = $("#user-input").val();
-    var test = currentWordStr.slice(0, input.length);
-    console.log($("#text-dump").scrollTop());
-
-    if (input.length === currentWordStr.length && input == test) {
-      currentWordNum = currentWordNum + 1;
+  $("#user-input").keyup((key) => {
+    var id = "#word" + currentId.toString();
+    var currentWord = $(id).text();
+    var userInput = $("#user-input").val();
+    if (userInput.length === currentWord.length && userInput == currentWord) {
+      currentId += 1;
+      count += 1;
+      right += 1;
+      $("#number-count").text(right);
+      var next = "#word" + currentId.toString();
       $(id).attr("class", "highlight-done");
       $(next).attr("class", "highlight-right");
       $("#user-input").val("");
-    } else if (input === test) {
-      $(".highlight-right").attr("scrollTop");
+      if (count === 5) {
+        $(".highlight-done").remove();
+        load(currentId + 5, currentId + 10);
+        count = 0;
+      }
+    } else if (userInput === currentWord.slice(0, userInput.length)) {
       $(id).attr("class", "highlight-right");
     } else {
-      $(id).attr("class", "highlight-wrong");
+      if (key.code !== "Backspace") {
+        wrong += 1;
+        $(id).attr("class", "highlight-wrong");
+      }
+
+      $("#number-wrong").text(wrong);
     }
   });
 });
