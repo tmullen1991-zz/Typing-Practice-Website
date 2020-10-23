@@ -20,35 +20,25 @@
   </head>
   <body>
     <div class="container width py-5">
-      <div class="row mx-auto text-area">
-        <span class="my-2 px-2" id="text-dump"></span>
-      </div>
-
-      <div class="row justify-content-center py-4 input-group" id="input-area">
-        <input class="input-group-text" id="user-input" />
-        <div class="input-group-text">
-          <span>Time: <span id="timer">00</span> S</span>
+      <div class="jumbotron">
+        <div class="row mx-auto text-area">
+          <span class="my-2 px-2" id="text-dump"></span>
         </div>
-        <div
-          class="row justify-content-center  input-group"
-          id="input-area"
-        >
+        <div class="row justify-content-center py-4 input-group" id="ui-area">
+          <input class="input-group-text" id="user-input" />
           <div class="input-group-text">
-            <span>
-              Words Completed: <span id="number-count"></span> =)
-              
-            </span>
+            <span>Time: <span id="timer">00</span> S</span>
           </div>
-          <div class="input-group-text">
-            <span>
-              Mistrokes: <span id="number-wrong"></span> =(
-              
-            </span>
+          <div class="row justify-content-center input-group" id="input-area">
+            <div class="input-group-text">
+              <span> Mistrokes: <span id="number-wrong"></span></span>
+            </div>
           </div>
         </div>
+        <div class="row mx-auto text-area">
+          <span class="my-2 px-2" id="text-done"></span>
+        </div>
       </div>
-
-      <div class="row"></div>
     </div>
   </body>
 </html>

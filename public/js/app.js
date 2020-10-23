@@ -1,10 +1,14 @@
 $(document).ready(function () {
   var wordList = [];
+
   var time = -1;
   var currentId = 0;
   var count = 0;
   var right = 0;
   var wrong = 0;
+  var wrongKeys = [];
+
+  console.log(wrongKeys);
   var load = function (x, y) {
     for (i = x; i < y; i++) {
       $("#text-dump").append(wordList[i]);
@@ -37,6 +41,16 @@ $(document).ready(function () {
           number = ("0" + number).slice(-2);
         }
         $("#timer").html(number);
+        if (time === 5) {
+          var wpm = right;
+          $("#ui-area").html(
+            "<div class='input-group-text'><span> You got " +
+              wpm +
+              " WPM </span></div><br><div class='input-group-text'><span> Keys missed: " +
+              wrongKeys.join(", ") +
+              "</span></div>"
+          );
+        }
       }, 1000);
     }
     var id = "#word" + currentId.toString();
@@ -52,7 +66,8 @@ $(document).ready(function () {
       $(next).attr("class", "highlight-right");
       $("#user-input").val("");
       if (count === 5) {
-        $(".highlight-done").remove();
+        $(".highlight-done").appendTo("#text-done");
+        $(".highlight-done").attr("class", "");
         load(currentId + 5, currentId + 10);
         count = 0;
       }
@@ -61,6 +76,7 @@ $(document).ready(function () {
     } else {
       if (key.code !== "Backspace") {
         wrong += 1;
+        wrongKeys.push(key.key);
         $(id).attr("class", "highlight-wrong");
       }
 
