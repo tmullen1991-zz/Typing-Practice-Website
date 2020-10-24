@@ -17,7 +17,6 @@ router.get("/api/words", function (req, res) {
       db.Word.find({ id: {$in:getByIds} })
         .then((word) => {
           res.send(word)
-          console.log(word)
         })
         .catch((err) => {
           console.log(err);
