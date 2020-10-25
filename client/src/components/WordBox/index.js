@@ -3,6 +3,7 @@ import Card from "react-bootstrap/Card";
 import API from "../../utils/api";
 
 class WordBox extends React.Component {
+ 
   constructor(props) {
     super(props);
     this.state = {
@@ -18,6 +19,7 @@ class WordBox extends React.Component {
       this.setState({ words: res.data });
     });
   };
+  
 
   render() {
     return (

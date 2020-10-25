@@ -3,6 +3,7 @@ import Nav from "react-bootstrap/Nav";
 import fire from "./fire.png";
 
 function Navbar() {
+  
   return (
     <Nav
       activeKey="/home"
