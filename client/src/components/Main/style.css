@@ -1,10 +1,11 @@
-.current-word{
-    background-color: lightgreen;
+.word{
     text-align: center;
     padding: 3px 5px 3px 5px;
     margin-right: -7px;
 }
-.inactive{
-    padding: 3px 5px 3px 5px;
-    margin-right: -7px;
+[status=active]{
+    background-color: lightgreen;
+}
+[status=wrong]{
+    background-color: red;
 }
