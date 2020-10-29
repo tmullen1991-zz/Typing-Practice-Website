@@ -1,55 +1,62 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import InputGroup from "react-bootstrap/InputGroup";
+import FormControl from "react-bootstrap/FormControl";
 import Card from "react-bootstrap/Card";
 import API from "../../utils/api";
-import Input from "../Input";
-import "./style.css"
 
-export default function Example() {
-  // Declare a new state variable, which we'll call "count"
-  const [words, setWords] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [num, setNum] = useState(0);
-  const [value, setValue] = useState("")
-
-  useEffect(() => {
-    async function loadWords() {
-      const response = await API.getWords();
-      const data = await response.data;
-      // suffle from alphabetical
-      data.sort(() => Math.random() - 0.5);
-      setWords(data);
-      setNum(0);
-    }
-    loadWords();
-    setLoading(false);
-  }, []);
-
-  // limit the number of words displayed
-  const display = words.slice(num, num + 20).map((x, i) => {
+class Input extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { value: "", current: 0, list: [] };
+    this.handleChange = this.handleChange.bind(this);
+  }
+  async componentDidMount() {
+    const words = await API.getWords();
+    const wordList = words.data.sort(() => Math.random() - 0.5);
+    this.state.list = wordList;
+    console.log(this.state);
+  }
+  changeState(){
+    console.log(this.state.list)
+    
+  }
+  /*display = this.state.list.slice(this.state.current, this.state.current + 20).map((x, i)=>{
     return (
-      <span className={(i === num) ? "current-word" : "inactive"} id={i} key={i}>
+      <span className={(i === this.state.current) ? "current-word" : "inactive"} id={i} key={i}>
         {x.name}
       </span>
     );
-  });
+  })*/
+  handleChange(event) {
+    this.setState({ value: event.nativeEvent.data });
+    event.preventDefault();
+  }
+  render() {
+    return (
+      <div className="container py-3">
+        <div className="row py-3 justify-content-center">
+          <Card style={{ width: "42rem" }}>
+            <Card.Text>
+              <span>{this.state.list}</span>
+            </Card.Text>
+          </Card>
+        </div>
 
-  
-  return (
-    <div className="container py-3">
-      <div className="row py-3 justify-content-center">
-        <Card style={{ width: "42rem" }}>
-          <Card.Text>
-            {loading ? (
-              <span>...loading words :)</span>
-            ) : (
-              <span>{display}</span>
-            )}
-          </Card.Text>
-        </Card>
+        <div className="row px-auto justify-content-center">
+          <InputGroup onChange={this.handleChange} style={{ width: "24rem" }}>
+            <FormControl
+              defaultValue={this.state.value}
+              placeholder="Type Words Here :)"
+              aria-label="Type Words Here :)"
+            />
+            <InputGroup.Append>
+              <InputGroup.Text id="timer">00</InputGroup.Text>
+            </InputGroup.Append>
+          </InputGroup>
+        </div>
       </div>
-      <div className="row justify-content-center">
-        <Input />
-      </div>
-    </div>
-  );
+    );
+  }
 }
+
+export default Input;
