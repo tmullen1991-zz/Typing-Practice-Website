@@ -36,7 +36,7 @@ export default function Example() {
   }, []);
 
   // display X amount of words at a given time and assign highlight to current word to be typed by user
-  const display = words.slice(num, num + 10).map((x, i) => {
+  const display = words.slice(num, num + 7).map((x, i) => {
     return (
       <span className={x.class} status={x.status} id={i} key={i}>
         {x.name}
@@ -95,13 +95,16 @@ export default function Example() {
     }, 1000);
     return timeState ? (setTimeState(false), interval) : false;
   };
+  const reload = () => {
+    window.location.reload();
+  };
 
   return (
     <div className="container py-3">
       {timesUp ? (
         <div>
           <div className="row py-3 justify-content-center">
-            <Card style={{ width: "42rem" }}>
+            <Card style={{ width: "30rem" }}>
               <Card.Text>
                 {loading ? (
                   <span>...loading words :)</span>
@@ -114,7 +117,7 @@ export default function Example() {
           <div className="row justify-content-center">
             <div className="container py-3">
               <div className="row px-auto justify-content-center">
-                <InputGroup onChange={testInput} style={{ width: "24rem" }}>
+                <InputGroup onChange={testInput} style={{ width: "30rem" }}>
                   <FormControl
                     defaultValue={value}
                     placeholder="Type Words Here :)"
@@ -131,11 +134,16 @@ export default function Example() {
       ) : (
         <div className="row py-3 justify-content-center">
           <Card style={{ width: "42rem" }}>
-            <Card.Text>
+          <div className="justify-content-center py-3">
               <h3>{strokes / 5} WPM</h3>
               <h6>Keystrokes: {strokes + misstrokes}</h6>
-              <h6>accuracy: {Math.floor(strokes / (strokes + misstrokes)*100)} %</h6>
-            </Card.Text>
+              <h6>
+                accuracy: {Math.floor((strokes / (strokes + misstrokes)) * 100)}{" "}
+                %
+              </h6>
+              
+              <button style={{ width: "5rem" }}onClick={reload}>⟳</button>
+              </div>
           </Card>
         </div>
       )}

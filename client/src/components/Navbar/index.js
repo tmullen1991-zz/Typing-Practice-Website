@@ -10,9 +10,9 @@ function Navbar() {
       className="bg-warning justify-content-center"
     >
       <Nav.Item>
-        <Nav.Link href="/home">
-          <img src={fire} height="25" width="25" alt="" /> Fast Fingers <img src={fire} height="25" width="25" alt="" />
-        </Nav.Link>
+      
+          <img src={fire} height="25" width="25" alt="" /> <h1>Fast Fingers</h1> <img src={fire} height="25" width="25" alt="" />
+   
       </Nav.Item>
     </Nav>
   );
