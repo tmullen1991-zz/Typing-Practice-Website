@@ -36,7 +36,7 @@ export default function Example() {
   }, []);
 
   // display X amount of words at a given time and assign highlight to current word to be typed by user
-  const display = words.slice(num, num + 7).map((x, i) => {
+  const display = words.slice(num, num + 5).map((x, i) => {
     return (
       <span className={x.class} status={x.status} id={i} key={i}>
         {x.name}
@@ -105,13 +105,13 @@ export default function Example() {
         <div>
           <div className="row py-3 justify-content-center">
             <Card style={{ width: "30rem" }}>
-              <Card.Text>
+              <Card.Body>
                 {loading ? (
                   <span>...loading words :)</span>
                 ) : (
-                  <span>{display}</span>
+                  <span className="text">{display}</span>
                 )}
-              </Card.Text>
+              </Card.Body>
             </Card>
           </div>
           <div className="row justify-content-center">

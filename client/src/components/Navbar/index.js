@@ -1,21 +1,29 @@
 import React from "react";
+import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import fire from "./fire.png";
 
-function Navbar() {
-  
+function App() {
   return (
-    <Nav
-      activeKey="/home"
-      className="bg-warning justify-content-center"
-    >
-      <Nav.Item>
-      
-          <img src={fire} height="25" width="25" alt="" /> <h1>Fast Fingers</h1> <img src={fire} height="25" width="25" alt="" />
-   
-      </Nav.Item>
-    </Nav>
+    <Navbar bg="secondary" variant="dark"expand="lg">
+      <Navbar.Brand className="py-1"href="/">Fast Fingers</Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="mr-auto text-left navbar-nav">
+          
+          <Nav.Link href="/">Home</Nav.Link>
+          <Nav.Link
+            href="Https://github.com/tmullen1991/Typing-Practice-Website"
+            target="#"
+          >
+            Github
+          </Nav.Link>
+          <Nav.Link href="https://tmullen1991.github.io/" target="#">
+            Me
+          </Nav.Link>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
   );
 }
 
-export default Navbar;
+export default App;
