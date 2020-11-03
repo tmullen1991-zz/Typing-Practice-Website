@@ -4,6 +4,9 @@ import axios from 'axios'
 export default {
     getWords: function() {
       return axios.get("/api/words");
+    },
+    getTopThousand: function() {
+      return axios.get("/api/top_thousand");
     }
   };
   

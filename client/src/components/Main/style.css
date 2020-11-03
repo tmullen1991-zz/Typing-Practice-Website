@@ -1,3 +1,14 @@
+h3{
+    color:darkgreen;
+}
+button{
+    width: 5rem;
+}
+.text{
+    font-size: large;
+    font-weight: bold;
+}
+
 .word{
     text-align: center;
     padding: 3px 5px 3px 5px;
@@ -9,10 +20,4 @@
 [status=wrong]{
     background-color: red;
 }
-h3{
-    color:darkgreen;
-}
-.text{
-    font-size: large;
-    font-weight: bold;
-}
+

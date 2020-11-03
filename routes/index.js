@@ -25,4 +25,20 @@ router.get("/api/words", function (req, res) {
   }
 });
 
+router.get("/api/top_thousand", function (req, res) {
+  var getByIds = []
+  for (i = 1; i <= 100; i++) {
+     getByIds.push(Math.floor(Math.random() * 999))
+    if (i === 100) {
+      db.TopThousand.find({ id: {$in:getByIds} })
+        .then((word) => {
+          res.send(word)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }
+});
+
 module.exports = router;

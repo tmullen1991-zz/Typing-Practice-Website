@@ -16,10 +16,14 @@ export default function Example() {
   const [timeState, setTimeState] = useState(true);
   const [time, setTime] = useState(60);
   const [timesUp, setTimesUp] = useState(true);
+
   // API call made to sever to grab random words from DB and store response in words array
-  useEffect(() => {
+  const apiCall = () =>{
     async function loadWords() {
-      const response = await API.getWords();
+      // hard mode API call
+      //const response = await API.getWords();
+      // regular mode API call
+      const response = await API.getTopThousand();
       const data = await response.data;
       // suffle words from alphabetical
       data.sort(() => Math.random() - 0.5);
@@ -33,7 +37,11 @@ export default function Example() {
     }
     loadWords();
     setLoading(false);
+  }
+  useEffect(() => {
+    apiCall()
   }, []);
+
 
   // display X amount of words at a given time and assign highlight to current word to be typed by user
   const display = words.slice(num, num + 5).map((x, i) => {
@@ -44,22 +52,23 @@ export default function Example() {
     );
   });
   // function used in test input once word is completed to reset user input area and assign next word as current
-  var update = (e) => {
+  const update = (e) => {
     var status = num + 1;
     setNum(status);
     e.target.value = "";
   };
   // function called every correct keystroke to log correct keystrokes in state variable strokes and highlight current word green
-  var right = (c) => {
+  const right = (c) => {
     words[c.updateId].status = "active";
     var status = strokes + 1;
     return setStrokes(status);
   };
   // function called every incorrect keystroke to log incorrect keystrokes in misstroke state variable and highlight word red
-  var wrong = (e, c) => {
+  const wrong = (e, c) => {
+    console.log(e.nativeEvent.data)
     words[c.updateId].status = "wrong";
     var status = misstrokes + 1;
-    return e.nativeEvent.inputType === "insertText"
+    return (e.nativeEvent.inputType === "insertText" && e.nativeEvent.data !== " ")
       ? setMisstrokes(status)
       : false;
   };
@@ -69,13 +78,14 @@ export default function Example() {
     //start timer function on first user input
     timer();
     // assign first word listed in word box as current
-    var current = words.find((obj) => {
+    const current = words.find((obj) => {
       return obj.updateId === num;
     });
     // take userinput and test against current word
     setValue(event.target.value);
     var userInput = event.target.value;
     var test = current.name.slice(0, userInput.length);
+    console.table([test, userInput, test === userInput]);
     test === userInput ? right(current) : wrong(event, current);
     // if word is completed corretly after space is hit call next word to be current
     return current.name + " " === userInput ? update(event) : false;
@@ -95,58 +105,62 @@ export default function Example() {
     }, 1000);
     return timeState ? (setTimeState(false), interval) : false;
   };
+
   const reload = () => {
     window.location.reload();
   };
 
   return (
     <div className="container py-3">
-      {timesUp ? (
-        <div>
-          <div className="row py-3 justify-content-center">
-            <Card style={{ width: "30rem" }}>
-              <Card.Body>
-                {loading ? (
-                  <span>...loading words :)</span>
-                ) : (
-                  <span className="text">{display}</span>
-                )}
-              </Card.Body>
-            </Card>
-          </div>
-          <div className="row justify-content-center">
-            <div className="container py-3">
-              <div className="row px-auto justify-content-center">
-                <InputGroup onChange={testInput} style={{ width: "30rem" }}>
-                  <FormControl
-                    defaultValue={value}
-                    placeholder="Type Words Here :)"
-                    aria-label="Type Words Here :)"
-                  />
-                  <InputGroup.Append>
-                    <InputGroup.Text id="timer">{time}</InputGroup.Text>
-                  </InputGroup.Append>
-                </InputGroup>
+        {timesUp ? (
+          <div>
+            <button onClick={apiCall}>⟳</button>
+            <div className="row py-3 justify-content-center">
+              <Card style={{ width: "30rem" }}>
+                <Card.Body>
+                  {loading ? (
+                    <span>...loading words :)</span>
+                  ) : (
+                    <span className="text">{display}</span>
+                  )}
+                </Card.Body>
+              </Card>
+            </div>
+            <div className="row justify-content-center">
+              <div className="container py-3">
+                <div className="row px-auto justify-content-center">
+                  <InputGroup onChange={testInput} style={{ width: "30rem" }}>
+                    <FormControl
+                      defaultValue={value}
+                      placeholder="Type Words Here :)"
+                      aria-label="Type Words Here :)"
+                    />
+                    <InputGroup.Append>
+                      <InputGroup.Text id="timer">{time}</InputGroup.Text>
+                    </InputGroup.Append>
+                  </InputGroup>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      ) : (
-        <div className="row py-3 justify-content-center">
-          <Card style={{ width: "42rem" }}>
-          <div className="justify-content-center py-3">
-              <h3>{strokes / 5} WPM</h3>
-              <h6>Keystrokes: {strokes + misstrokes}</h6>
-              <h6>
-                accuracy: {Math.floor((strokes / (strokes + misstrokes)) * 100)}{" "}
-                %
-              </h6>
-              
-              <button style={{ width: "5rem" }}onClick={reload}>⟳</button>
+        ) : (
+          <div className="row py-3 justify-content-center">
+            <Card style={{ width: "30rem" }}>
+              <div className="justify-content-center py-3">
+                <h3>{Math.floor(strokes / 5)} WPM</h3>
+                <h6>Keystrokes: {strokes + misstrokes}</h6>
+                <h6>
+                  Accurate Strokes / Missstrokes: {strokes}/{misstrokes}
+                </h6>
+                <h6>
+                  accuracy:{" "}
+                  {Math.floor((strokes / (strokes + misstrokes)) * 100)} %
+                </h6>
+                <button onClick={reload}>⟳</button>
               </div>
-          </Card>
-        </div>
-      )}
+            </Card>
+          </div>
+        )}
     </div>
   );
 }

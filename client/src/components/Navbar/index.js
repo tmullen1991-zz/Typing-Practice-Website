@@ -9,7 +9,6 @@ function App() {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto text-left navbar-nav">
-          
           <Nav.Link href="/">Home</Nav.Link>
           <Nav.Link
             href="Https://github.com/tmullen1991/Typing-Practice-Website"
