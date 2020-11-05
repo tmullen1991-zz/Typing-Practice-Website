@@ -1,16 +1,24 @@
 import Jumbotron from "react-bootstrap/Jumbotron";
-import Main from "./components/Main";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Easy from "./pages/Easy";
+import Hard from "./pages/Hard";
 import Navbar from "./components/Navbar";
+
 import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <Jumbotron className="container py-5 my-5 justify-content-center">
-        <Navbar />
-        <Main />
-      </Jumbotron>
-    </div>
+    <Router>
+      <div className="App">
+        <Jumbotron className="container py-5 my-5 justify-content-center">
+          <Navbar />
+          <Switch>
+            <Route exact path="/" component={Easy} />
+            <Route exact path="/Hard" component={Hard} />
+          </Switch>
+        </Jumbotron>
+      </div>
+    </Router>
   );
 }
 

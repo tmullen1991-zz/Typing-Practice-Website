@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
-import API from "../../utils/api";
+import API from "../utils/api";
+import Sidecard from "../components/Sidecard";
 import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
 import "./style.css";
-
 export default function Example() {
   // Declare a new state variable, which we'll call "count"
   const [words, setWords] = useState([]);
@@ -18,12 +18,10 @@ export default function Example() {
   const [timesUp, setTimesUp] = useState(true);
 
   // API call made to sever to grab random words from DB and store response in words array
-  const apiCall = () =>{
+  const apiCall = () => {
     async function loadWords() {
       // hard mode API call
-      //const response = await API.getWords();
-      // regular mode API call
-      const response = await API.getTopThousand();
+      const response = await API.getWords();
       const data = await response.data;
       // suffle words from alphabetical
       data.sort(() => Math.random() - 0.5);
@@ -37,11 +35,10 @@ export default function Example() {
     }
     loadWords();
     setLoading(false);
-  }
+  };
   useEffect(() => {
-    apiCall()
+    apiCall();
   }, []);
-
 
   // display X amount of words at a given time and assign highlight to current word to be typed by user
   const display = words.slice(num, num + 5).map((x, i) => {
@@ -65,10 +62,11 @@ export default function Example() {
   };
   // function called every incorrect keystroke to log incorrect keystrokes in misstroke state variable and highlight word red
   const wrong = (e, c) => {
-    console.log(e.nativeEvent.data)
+    console.log(e.nativeEvent.data);
     words[c.updateId].status = "wrong";
     var status = misstrokes + 1;
-    return (e.nativeEvent.inputType === "insertText" && e.nativeEvent.data !== " ")
+    return e.nativeEvent.inputType === "insertText" &&
+      e.nativeEvent.data !== " "
       ? setMisstrokes(status)
       : false;
   };
@@ -112,39 +110,53 @@ export default function Example() {
 
   return (
     <div className="container py-3">
-        {timesUp ? (
-          <div>
-            <button onClick={apiCall}>⟳</button>
-            <div className="row py-3 justify-content-center">
-              <Card style={{ width: "30rem" }}>
-                <Card.Body>
-                  {loading ? (
-                    <span>...loading words :)</span>
-                  ) : (
-                    <span className="text">{display}</span>
-                  )}
-                </Card.Body>
-              </Card>
-            </div>
-            <div className="row justify-content-center">
-              <div className="container py-3">
-                <div className="row px-auto justify-content-center">
-                  <InputGroup onChange={testInput} style={{ width: "30rem" }}>
-                    <FormControl
-                      defaultValue={value}
-                      placeholder="Type Words Here :)"
-                      aria-label="Type Words Here :)"
-                    />
-                    <InputGroup.Append>
-                      <InputGroup.Text id="timer">{time}</InputGroup.Text>
-                    </InputGroup.Append>
-                  </InputGroup>
-                </div>
+      <div className="row">
+        {/*contains side card difficulty choices*/}
+        <div className="col-3">
+          <a href="/">
+            <Sidecard
+              onClick={reload}
+              difficulty="Easy Mode"
+              description="Top 1000 Typed Words"
+            />
+          </a>
+          <a href="/hard">
+            <Sidecard
+              onClick={reload}
+              difficulty="Hard Mode"
+              description="Randoms Words"
+            />
+          </a>
+        </div>
+        {/*contains wordbox and input area or results depending on time state*/}
+        <div className="col-9">
+          {timesUp ? (
+            <div>
+              <div className="py-2">
+                <Card style={{ width: "30rem" }}>
+                  <Card.Body>
+                    {loading ? (
+                      <span>...loading words :)</span>
+                    ) : (
+                      <span className="text">{display}</span>
+                    )}
+                  </Card.Body>
+                </Card>
+              </div>
+              <div className="py-2">
+                <InputGroup onChange={testInput} style={{ width: "30rem" }}>
+                  <FormControl
+                    defaultValue={value}
+                    placeholder="Type Here :)"
+                    aria-label="Type Here :)"
+                  />
+                  <InputGroup.Append>
+                    <InputGroup.Text id="timer">{time}</InputGroup.Text>
+                  </InputGroup.Append>
+                </InputGroup>
               </div>
             </div>
-          </div>
-        ) : (
-          <div className="row py-3 justify-content-center">
+          ) : (
             <Card style={{ width: "30rem" }}>
               <div className="justify-content-center py-3">
                 <h3>{Math.floor(strokes / 5)} WPM</h3>
@@ -159,8 +171,9 @@ export default function Example() {
                 <button onClick={reload}>⟳</button>
               </div>
             </Card>
-          </div>
-        )}
+          )}
+        </div>
+      </div>
     </div>
   );
 }
