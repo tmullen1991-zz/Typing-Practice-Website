@@ -6,8 +6,6 @@ const routes = require("./routes");
 const app = express();
 var PORT = process.env.PORT || 8080;
 
-// setup HTML logger
-app.use(morgan('tiny'))
 
 // Serve static content for the app from the "public" directory in the application directory.
 
@@ -18,13 +16,17 @@ app.use(express.json());
 app.use(express.static("client/build"));
 
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/wordDB", {
+mongoose.connect(process.env.MONGODB_URI  || "mongodb://localhost/wordDB", {
   useUnifiedTopology: true,
   useNewUrlParser: true,
 });
 
 // Routes
 app.use(routes);
+
+if(process.env.NODE_ENV === "production"){
+  app.use(express.static("client/build"));
+}
 
 app.listen(PORT, function () {
   // Log (server-side) when our server has started
