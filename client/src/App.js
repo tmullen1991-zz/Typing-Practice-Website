@@ -1,5 +1,5 @@
 import Jumbotron from "react-bootstrap/Jumbotron";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Easy from "./pages/Easy";
 import Hard from "./pages/Hard";
 import Navbar from "./components/Navbar";
@@ -8,17 +8,15 @@ import "./App.css";
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Jumbotron className="container py-5 my-5 justify-content-center">
-          <Navbar />
-          <Switch>
-            <Route path="/" component={Easy} />
-            <Route path="/Hard" component={Hard} />
-          </Switch>
-        </Jumbotron>
-      </div>
-    </Router>
+    <div className="App">
+      <Jumbotron className="container py-5 my-5 justify-content-center">
+        <Navbar />
+        <Router path="/">
+          <Route path="/Easy" component={Easy} />
+          <Route path="/Hard" component={Hard} />
+        </Router>
+      </Jumbotron>
+    </div>
   );
 }
 
