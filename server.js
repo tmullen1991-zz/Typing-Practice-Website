@@ -3,7 +3,7 @@ const morgan = require("morgan");
 const mongoose = require("mongoose");
 const routes = require("./routes");
 require("dotenv").config();
-console.log(process.env.password)
+
 
 const app = express();
 const PORT = process.env.PORT || 8080;
