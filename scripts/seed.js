@@ -1,13 +1,28 @@
 const mongoose = require("mongoose");
 const db = require("../models");
-const list = require("./json/top_thousand.json");
+const list = require("./json/v_to_z_words");
 const fs = require("fs");
+require("dotenv").config();
 
+//use to populate localdb
+/*
 mongoose.connect("mongodb://localhost/wordDB", {
   useUnifiedTopology: true,
   useNewUrlParser: true,
 });
+*/
 
+// use to populate atlasDB on mongoDB
+/*
+mongoose.connect(
+  "mongodb+srv://dBManage:" +
+    process.env.password +
+    "@typing-words.8e9eo.mongodb.net/wordDB?retryWrites=true&w=majority",
+  {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+  });
+  */
 // delete all before updating
 /*
 db.Word.deleteMany({})
@@ -46,7 +61,6 @@ db.TopThousand.insertMany(list)
     process.exit(1);
   });
 */
-
 // converts large full word list JSON (words_dictionary.json) to include ids and creates new JSON for above code to create new db
 /*
 
