@@ -32,15 +32,17 @@ export default function Example() {
         element.status = "inactive";
       });
       setWords(data);
+      
       setNum(0);
     }
     loadWords();
     setLoading(false);
   };
+  /*
   useEffect(() => {
     apiCall();
   }, []);
-
+*/
   // display X amount of words at a given time and assign highlight to current word to be typed by user
   const display = words.slice(num, num + 5).map((x, i) => {
     return (

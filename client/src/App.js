@@ -12,8 +12,8 @@ function App() {
       <Jumbotron className="container py-5 my-5 justify-content-center">
         <Navbar />
         <Router path="/">
-          <Route path="/Easy" component={Easy} />
-          <Route path="/Hard" component={Hard} />
+          <Route path="/easy" component={Easy} />
+          <Route path="/hard" component={Hard} />
         </Router>
       </Jumbotron>
     </div>
