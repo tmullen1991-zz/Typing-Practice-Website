@@ -3,9 +3,10 @@ const morgan = require("morgan");
 const mongoose = require("mongoose");
 const routes = require("./routes");
 require("dotenv").config();
+console.log(process.env.password)
 
 const app = express();
-var PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8080;
 
 // Serve static content for the app from the "public" directory in the application directory.
 
