@@ -63,7 +63,6 @@ export default function Example() {
   };
   // function called every incorrect keystroke to log incorrect keystrokes in misstroke state variable and highlight word red
   const wrong = (e, c) => {
-    console.log(e.nativeEvent.data);
     words[c.updateId].status = "wrong";
     var status = misstrokes + 1;
     return e.nativeEvent.inputType === "insertText" &&
@@ -84,7 +83,6 @@ export default function Example() {
     setValue(event.target.value);
     var userInput = event.target.value;
     var test = current.name.slice(0, userInput.length);
-    console.table([test, userInput, test === userInput]);
     test === userInput ? right(current) : wrong(event, current);
     // if word is completed corretly after space is hit call next word to be current
     return current.name + " " === userInput ? update(event) : false;
