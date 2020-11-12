@@ -2,10 +2,9 @@
 const router = require("express").Router();
 const path = require("path");
 const db = require("../models");
-const root = require("path").join(__dirname, "client", "build");
 
 // API Routes
-router.get("/api/words", function (req, res) {
+router.get("/words", function (req, res) {
   var getByIds = [];
   for (i = 1; i <= 100; i++) {
     getByIds.push(Math.floor(Math.random() * 370100));
@@ -21,7 +20,7 @@ router.get("/api/words", function (req, res) {
   }
 });
 
-router.get("/api/top_thousand", function (req, res) {
+router.get("/top_thousand", function (req, res) {
   var getByIds = [];
   for (i = 1; i <= 100; i++) {
     getByIds.push(Math.floor(Math.random() * 999));
@@ -39,9 +38,8 @@ router.get("/api/top_thousand", function (req, res) {
 
 //default to home
 
-router.use(express.static(root));
-router.get("*", (req, res) => {
-  res.sendFile("index.html", { root });
+router.use("/", function (req, res) {
+  res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
 
 module.exports = router;
