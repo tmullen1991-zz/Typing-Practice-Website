@@ -19,7 +19,7 @@ export default function Example() {
   const [timesUp, setTimesUp] = useState(true);
 
   // API call made to sever to grab random words from DB and store response in words array
-  const apiCall = () => {
+  /*const apiCall = () => {
     async function loadWords() {
       // regular mode API call
       const response = await API.getTopThousand();
@@ -42,7 +42,7 @@ export default function Example() {
   useEffect(() => {
     apiCall();
   }, []);
-
+*/
   // display X amount of words at a given time and assign highlight to current word to be typed by user
   const display = words.slice(num, num + 5).map((x, i) => {
     return (
