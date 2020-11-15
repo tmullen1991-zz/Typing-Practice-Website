@@ -9,6 +9,13 @@ require("dotenv").config();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(root));
+  app.get("*", (req, res) => {
+    res.sendFile("index.html", { root });
+  });
+}
+
 // Routes
 app.use(routes);
 
@@ -18,12 +25,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/wordDB", {
   useNewUrlParser: true,
 });
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(root));
-  app.get("*", (req, res) => {
-    res.sendFile("index.html", { root });
-  });
-}
+
 
 app.listen(PORT, function () {
   // Log (server-side) when our server has started
