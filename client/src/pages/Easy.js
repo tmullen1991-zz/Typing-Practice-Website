@@ -111,9 +111,10 @@ export default function Example() {
   };
 
   return (
+    /*
     <div className="container py-3">
       <div className="row">
-        {/*contains side card difficulty choices*/}
+        //contains side card difficulty choices
         <div className="col-3">
           <a href="/easy">
             <Sidecard
@@ -130,7 +131,7 @@ export default function Example() {
             />
           </a>
         </div>
-        {/*contains wordbox and input area or results depending on time state*/}
+        //contains wordbox and input area or results depending on time state
         <div className="col-9">
           {timesUp ? (
             <div>
@@ -177,5 +178,7 @@ export default function Example() {
         </div>
       </div>
     </div>
+    */
+   <div>hello</div>
   );
 }
