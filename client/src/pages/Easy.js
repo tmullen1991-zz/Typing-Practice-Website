@@ -7,6 +7,7 @@ import FormControl from "react-bootstrap/FormControl";
 import "./style.css";
 
 export default function Example() {
+  /*
   // Declare a new state variable, which we'll call "count"
   const [words, setWords] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -109,7 +110,7 @@ export default function Example() {
   const reload = () => {
     window.location.reload();
   };
-
+*/
   return (
     /*
     <div className="container py-3">
