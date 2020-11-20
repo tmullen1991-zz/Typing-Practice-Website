@@ -7,7 +7,6 @@ import FormControl from "react-bootstrap/FormControl";
 import "./style.css";
 
 export default function Example() {
-  /*
   // Declare a new state variable, which we'll call "count"
   const [words, setWords] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -26,7 +25,7 @@ export default function Example() {
       const response = await API.getTopThousand();
       const data = await response.data;
       // suffle words from alphabetical
-      console.log(data)
+      console.log(data);
       data.sort(() => Math.random() - 0.5);
       data.map((x, i) => (x.updateId = i));
       data.forEach((element) => {
@@ -39,7 +38,7 @@ export default function Example() {
     loadWords();
     setLoading(false);
   };
-  
+
   useEffect(() => {
     apiCall();
   }, []);
@@ -66,7 +65,6 @@ export default function Example() {
   };
   // function called every incorrect keystroke to log incorrect keystrokes in misstroke state variable and highlight word red
   const wrong = (e, c) => {
-    
     words[c.updateId].status = "wrong";
     var status = misstrokes + 1;
     return e.nativeEvent.inputType === "insertText" &&
@@ -110,12 +108,11 @@ export default function Example() {
   const reload = () => {
     window.location.reload();
   };
-*/
+
   return (
-    /*
     <div className="container py-3">
       <div className="row">
-        //contains side card difficulty choices
+        {/*contains side card difficulty choices*/}
         <div className="col-3">
           <a href="/easy">
             <Sidecard
@@ -132,7 +129,7 @@ export default function Example() {
             />
           </a>
         </div>
-        //contains wordbox and input area or results depending on time state
+        {/*contains wordbox and input area or results depending on time state*/}
         <div className="col-9">
           {timesUp ? (
             <div>
@@ -179,7 +176,5 @@ export default function Example() {
         </div>
       </div>
     </div>
-    */
-   <div>hello</div>
   );
 }
