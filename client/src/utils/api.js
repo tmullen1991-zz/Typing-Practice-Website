@@ -6,6 +6,6 @@ export default {
     return axios.get("/api/words")
   },
   getTopThousand: function () {
-    return axios.get("/api/top_thousand");
+    return axios.get("/api/top_thousand").catch(function(err){console.log(err)});
   },
 };
