@@ -2,7 +2,6 @@
 const path = require("path");
 const router = require("express").Router();
 const apiRoutes = require("./api");
-const root = require("path").join(__dirname, "../client", "build");
 
 // API Routes
 router.use("/api", apiRoutes);
@@ -13,6 +12,3 @@ router.use(function(req, res) {
 });
 
 module.exports = router;
-
-
-
