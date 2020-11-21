@@ -26,7 +26,6 @@ export default function Example() {
       const response = await API.getTopThousand();
       const data = await response.data;
       // suffle words from alphabetical
-      console.log(data);
       data.sort(() => Math.random() - 0.5);
       data.map((x, i) => (x.updateId = i));
       data.forEach((element) => {
