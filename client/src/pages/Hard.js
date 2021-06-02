@@ -17,6 +17,7 @@ export default function Example() {
   const [time, setTime] = useState(60);
   const [timesUp, setTimesUp] = useState(true);
 
+
   // API call made to sever to grab random words from DB and store response in words array
   const apiCall = () => {
     async function loadWords() {
