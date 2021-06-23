@@ -12,7 +12,6 @@
     "mongoose": "^5.12.14",
     "morgan": "^1.10.0"
   },
-  "devDependencies": {},
   "scripts": {
     "client-install": "npm install --prefix client",
     "start": "node server.js && npm run client",
