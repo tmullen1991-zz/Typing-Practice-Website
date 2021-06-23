@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const routes = require("./routes");
 const app = express();
 const PORT = process.env.PORT || 5000;
-const root = require("path").join(__dirname, "client");
+// const root = require("path").join(__dirname, "client");
 require("dotenv").config();
 
 app.use(express.urlencoded({ extended: true }));
