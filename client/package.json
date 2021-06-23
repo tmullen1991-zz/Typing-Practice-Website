@@ -27,7 +27,6 @@
     ]
   },
   "proxy": "http://127.0.0.1:5000",
-  "homepage": "./",
   "browserslist": {
     "production": [
       ">0.2%",
