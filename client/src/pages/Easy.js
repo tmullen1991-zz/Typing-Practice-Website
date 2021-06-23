@@ -18,6 +18,7 @@ export default function Example() {
   const [timeState, setTimeState] = useState(true);
   const [time, setTime] = useState(60);
   const [timesUp, setTimesUp] = useState(true);
+  const [holder, setHolder] = useState("Type words here :)")
 
   // API call made to sever to grab random words from DB and store response in words array
   const apiCall = () => {
@@ -77,6 +78,8 @@ export default function Example() {
   const testInput = (event) => {
     //start timer function on first user input
     timer();
+    // update placeholder in input filed to be blank
+    setHolder("")
     // assign first word listed in word box as current
     const current = words.find((obj) => {
       return obj.updateId === num;
@@ -148,8 +151,8 @@ export default function Example() {
                 <InputGroup onChange={testInput} style={{ width: "30rem" }}>
                   <FormControl
                     defaultValue={value}
-                    placeholder="Type Here :)"
-                    aria-label="Type Here :)"
+                    placeholder={holder}
+                    aria-label={holder}
                   />
                   <InputGroup.Append>
                     <InputGroup.Text id="timer">{time}</InputGroup.Text>

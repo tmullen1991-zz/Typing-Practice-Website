@@ -24,7 +24,7 @@ app.use((err, req, res, next) => {
 });
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/wordDB", {
+mongoose.connect(process.env.MONGODB_URI || process.env.URI, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
 });
