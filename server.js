@@ -13,7 +13,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-// Routes
+//Routes
 app.use(routes);
 // log errors
 app.use((err, req, res, next) => {
