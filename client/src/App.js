@@ -13,7 +13,7 @@ function App() {
     <Router exact path="/">
       <Navbar />
       <div className="App">
-        <Jumbotron className="container py-5 my-5 justify-content-center">
+        <Jumbotron className="container py-5 my-5 justify-content-center" fluid>
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/easy" component={Easy} />
